@@ -2,4 +2,10 @@
     <string name="app_name">Tourist</string>
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Send</string>
+    <string name="new_visit">New Visit</string>
+    <string name="title">Title</string>
+    <string name="enter_title">Enter a title</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="start">Start</string>
 </resources>
