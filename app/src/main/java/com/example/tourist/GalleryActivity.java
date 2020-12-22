@@ -45,12 +45,23 @@ public class GalleryActivity extends AppCompatActivity {
         mAdapter = new GalleryAdapter(images);
         mRecyclerView.setAdapter(mAdapter);
 
-        // the floating button that will allow us to get the images from the Gallery
+        initEasyImage();
+
+        // get the images from the Gallery
         FloatingActionButton fabGallery = (FloatingActionButton) findViewById(R.id.fab_gallery);
         fabGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 EasyImage.openGallery(getActivity(), 0);
+            }
+        });
+
+        // Get a photo from camera
+        FloatingActionButton fabCamera = (FloatingActionButton) findViewById(R.id.fab_camera);
+        fabCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EasyImage.openCamera(getActivity(), 0);
             }
         });
     }
