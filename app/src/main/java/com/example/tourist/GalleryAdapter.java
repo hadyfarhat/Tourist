@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
     private Context context;
     private static List<ImageElement> items;
 
+
     public class View_Holder extends RecyclerView.ViewHolder {
         ImageView imageView;
 
@@ -30,9 +32,11 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
         }
     }
 
+
     public GalleryAdapter(List<ImageElement> items) {
         this.items = items;
     }
+
 
     public GalleryAdapter(Context context, List<ImageElement> items) {
         super();
@@ -40,9 +44,11 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
         this.context = context;
     }
 
+
     public static List<ImageElement> getItems() {
         return items;
     }
+
 
     @Override
     public View_Holder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -54,15 +60,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
         return holder;
     }
 
+
     @Override
     public void onBindViewHolder(View_Holder holder, int position) {
         if (holder != null && items.get(position) != null) {
             if (items.get(position).image != -1) {
                 holder.imageView.setImageResource(items.get(position).image);
             } else if (items.get(position).file != null) {
-                Bitmap bitmap = decodeSampledBitmapFromResource(
-                        items.get(position).file.getAbsolutePath(), 150, 150);
-                holder.imageView.setImageBitmap(bitmap);
+                new UploadSingleImageTask().execute(new HolderAndPosition(position, holder));
             }
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +80,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
             });
         }
     }
+
 
     @Override
     public int getItemCount() {
@@ -94,6 +100,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
         return BitmapFactory.decodeFile(filePath, options);
     }
 
+
     public static int calculateInSampleSize(
             BitmapFactory.Options options, int reqWidth, int reqHeight) {
         // Raw height and width of image
@@ -111,5 +118,33 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
             }
         }
         return inSampleSize;
+    }
+
+
+    private class UploadSingleImageTask extends AsyncTask<HolderAndPosition, Void, Bitmap> {
+        HolderAndPosition holdAndPos;
+
+        @Override
+        protected Bitmap doInBackground(HolderAndPosition... holderAndPosition) {
+            holdAndPos = holderAndPosition[0];
+            Bitmap bitmap = decodeSampledBitmapFromResource(
+                    items.get(holdAndPos.position).file.getAbsolutePath(), 100, 100);
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            holdAndPos.holder.imageView.setImageBitmap(bitmap);
+        }
+    }
+
+    private class HolderAndPosition {
+        int position;
+        View_Holder holder;
+
+        public HolderAndPosition(int position, View_Holder holder) {
+            this.position = position;
+            this.holder = holder;
+        }
     }
 }
