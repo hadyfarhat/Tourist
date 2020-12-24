@@ -121,6 +121,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
     }
 
 
+    // TODO: 23/12/2020 Save bitmap into a file for better efficiency
     private class UploadSingleImageTask extends AsyncTask<HolderAndPosition, Void, Bitmap> {
         HolderAndPosition holdAndPos;
 
@@ -137,6 +138,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
             holdAndPos.holder.imageView.setImageBitmap(bitmap);
         }
     }
+
 
     private class HolderAndPosition {
         int position;

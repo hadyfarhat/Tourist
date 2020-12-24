@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -41,7 +42,7 @@ public class GalleryActivity extends AppCompatActivity {
             images.add(new ImageElement(R.drawable.joe1));
         }
 
-        // Assign Adapter to Recyler View
+        // Assign Adapter to Recycler View
         mAdapter = new GalleryAdapter(images);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -56,6 +57,7 @@ public class GalleryActivity extends AppCompatActivity {
             }
         });
 
+        // TODO: 23/12/2020 Fix camera dependencies
         // Get a photo from camera
         FloatingActionButton fabCamera = (FloatingActionButton) findViewById(R.id.fab_camera);
         fabCamera.setOnClickListener(new View.OnClickListener() {
