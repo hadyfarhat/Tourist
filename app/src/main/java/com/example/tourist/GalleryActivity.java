@@ -35,10 +35,12 @@ public class GalleryActivity extends AppCompatActivity {
         // Initialise Recycler View and assign it a layout manager
         mRecyclerView = findViewById(R.id.images);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+        int numberOfColumnsInTheGrid = 3;
+        mRecyclerView.setLayoutManager(
+                new GridLayoutManager(this, numberOfColumnsInTheGrid));
 
         // Add photos to images array
-        for (int i = 0; i < 12; ++i) {
+        for (int i = 0; i < 15; ++i) {
             images.add(new ImageElement(R.drawable.joe1));
         }
 

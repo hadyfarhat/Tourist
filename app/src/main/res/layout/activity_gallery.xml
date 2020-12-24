@@ -26,11 +26,11 @@
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginBottom="44dp"
-        app:backgroundTint="@android:color/holo_orange_light"
-        android:src="@drawable/ic_gallery_black_24dp"
+        android:src="@drawable/ic_gallery_white_24dp"
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/FAB" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_camera"
