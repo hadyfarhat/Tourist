@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Holder> {
@@ -123,11 +124,12 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
 
     // TODO: 23/12/2020 Save bitmap into a file for better efficiency
     private class UploadSingleImageTask extends AsyncTask<HolderAndPosition, Void, Bitmap> {
-        HolderAndPosition holdAndPos;
+        private WeakReference<HolderAndPosition>  holderAndPositionReference;
 
         @Override
         protected Bitmap doInBackground(HolderAndPosition... holderAndPosition) {
-            holdAndPos = holderAndPosition[0];
+            holderAndPositionReference = new WeakReference<>(holderAndPosition[0]);
+            HolderAndPosition holdAndPos = holderAndPositionReference.get();
             Bitmap bitmap = decodeSampledBitmapFromResource(
                     items.get(holdAndPos.position).file.getAbsolutePath(), 100, 100);
             return bitmap;
@@ -135,6 +137,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
 
         @Override
         protected void onPostExecute(Bitmap bitmap) {
+            HolderAndPosition holdAndPos = holderAndPositionReference.get();
             holdAndPos.holder.imageView.setImageBitmap(bitmap);
         }
     }
