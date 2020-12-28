@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,8 +67,10 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
     public void onBindViewHolder(View_Holder holder, int position) {
         if (holder != null && items.get(position) != null) {
             if (items.get(position).image != -1) {
+                Log.d("Using image resource", Integer.toString(items.get(position).image));
                 holder.imageView.setImageResource(items.get(position).image);
             } else if (items.get(position).file != null) {
+                Log.d("Using bitmap", items.get(position).file.getAbsolutePath());
                 new UploadSingleImageTask().execute(new HolderAndPosition(position, holder));
             }
 
@@ -86,6 +89,11 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
     @Override
     public int getItemCount() {
         return items.size();
+    }
+
+    public void addImage(ImageElement imageElement) {
+        getItems().add(imageElement);
+        notifyDataSetChanged();
     }
 
 

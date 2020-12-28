@@ -1,6 +1,9 @@
 package com.example.tourist;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,6 +13,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.example.tourist.model.Moment;
+import com.example.tourist.viewmodel.MomentViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.File;
@@ -21,16 +26,17 @@ import pl.aprilapps.easyphotopicker.EasyImage;
 
 public class GalleryActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private GalleryAdapter mAdapter;
     private List<ImageElement> images = new ArrayList<>();
     private Activity activity;
+    private MomentViewModel mMomentViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
-
         activity = this;
+        mMomentViewModel = ViewModelProviders.of(this).get(MomentViewModel.class);
 
         // Initialise Recycler View and assign it a layout manager
         mRecyclerView = findViewById(R.id.images);
@@ -47,6 +53,17 @@ public class GalleryActivity extends AppCompatActivity {
         // Assign Adapter to Recycler View
         mAdapter = new GalleryAdapter(images);
         mRecyclerView.setAdapter(mAdapter);
+
+        // Add observer for the Moment live data
+        mMomentViewModel.getAllMoments().observe(this, new Observer<List<Moment>>() {
+            @Override
+            public void onChanged(List<Moment> moments) {
+                for (Moment moment : moments) {
+                    ImageElement element = new ImageElement(moment.getImageFilePathInt());
+                    mAdapter.addImage(element);
+                }
+            }
+        });
 
         initEasyImage();
 
