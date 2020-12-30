@@ -16,6 +16,9 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tourist.model.Moment;
+
+import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
@@ -96,6 +99,21 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
         notifyDataSetChanged();
     }
 
+    public void addImages(List<ImageElement> imageElements) {
+        for (ImageElement imageElement : imageElements) {
+            getItems().add(imageElement);
+            notifyDataSetChanged();
+        }
+    }
+
+    public void addMoments(List<Moment> moments) {
+        ImageElement tmp;
+        for (Moment moment : moments) {
+            tmp = new ImageElement(new File(moment.getImageFilePath()));
+            getItems().add(tmp);
+            notifyDataSetChanged();
+        }
+    }
 
     public static Bitmap decodeSampledBitmapFromResource(String filePath, int reqWidth, int reqHeight) {
         // First decode with inJustDecodeBounds=true to check dimensions

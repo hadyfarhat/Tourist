@@ -59,8 +59,13 @@ public class GalleryActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<Moment> moments) {
                 for (Moment moment : moments) {
-                    ImageElement element = new ImageElement(moment.getImageFilePathInt());
-                    mAdapter.addImage(element);
+                    if (moment.imageFilePathIsString()) {
+                        ImageElement element = new ImageElement(new File(moment.getImageFilePath()));
+                        mAdapter.addImage(element);
+                    } else if (moment.imageFilePathIsInt()) {
+                        ImageElement element = new ImageElement(moment.getImageFilePathInt());
+                        mAdapter.addImage(element);
+                    }
                 }
             }
         });
@@ -103,9 +108,26 @@ public class GalleryActivity extends AppCompatActivity {
      * @param returnedPhotos
      */
     private void onPhotosReturned(List<File> returnedPhotos) {
-        images.addAll(getImageElements(returnedPhotos));
-        mAdapter.notifyDataSetChanged();
-        mRecyclerView.scrollToPosition(returnedPhotos.size() - 1);
+        List<Moment> moments = getMomentsFromReturnedPhotos(returnedPhotos);
+        for (Moment moment : moments) {
+            mMomentViewModel.insert(moment);
+        }
+    }
+
+    /**
+     * given a list of photos, it creates a list of Moments
+     * @param returnedPhotos
+     * @return
+     */
+    private List<Moment> getMomentsFromReturnedPhotos(List<File> returnedPhotos) {
+        List<Moment> moments = new ArrayList<>();
+        Moment tmpMoment;
+        for (File file: returnedPhotos){
+            tmpMoment = new Moment("title");
+            tmpMoment.setImageFilePath(file.getPath());
+            moments.add(tmpMoment);
+        }
+        return moments;
     }
 
     /**

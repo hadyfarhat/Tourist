@@ -52,12 +52,12 @@ public abstract class MomentRoomDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            mDao.deleteAll();
-            moments.add(createMoment(R.drawable.joe2));
-            moments.add(createMoment(R.drawable.joe3));
-            for (Moment moment : moments) {
-                mDao.insert(moment);
-            }
+            //mDao.deleteAll();
+            //moments.add(createMoment(R.drawable.joe2));
+            //moments.add(createMoment(R.drawable.joe3));
+            //for (Moment moment : moments) {
+            //    mDao.insert(moment);
+            //}
             return null;
         }
     }

@@ -13,7 +13,7 @@ public class Moment {
     private String title;
     private String description;
     private String imageFilePath;
-    private int imageFilePathInt;
+    private int imageFilePathInt = -1;
     // TODO image int file path
     // TODO timestamp member field
 
@@ -59,5 +59,13 @@ public class Moment {
 
     public void setImageFilePathInt(@NonNull int imageFilePathInt) {
         this.imageFilePathInt = imageFilePathInt;
+    }
+
+    public boolean imageFilePathIsInt() {
+        return this.getImageFilePathInt() != -1;
+    }
+
+    public boolean imageFilePathIsString() {
+        return this.getImageFilePath() != null;
     }
 }
