@@ -1,5 +1,6 @@
 package com.example.tourist;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
@@ -27,7 +28,6 @@ import pl.aprilapps.easyphotopicker.EasyImage;
 public class GalleryActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private GalleryAdapter mAdapter;
-    private List<ImageElement> images = new ArrayList<>();
     private Activity activity;
     private MomentViewModel mMomentViewModel;
 
@@ -45,28 +45,16 @@ public class GalleryActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(
                 new GridLayoutManager(this, numberOfColumnsInTheGrid));
 
-        // Add photos to images array
-        for (int i = 0; i < 15; ++i) {
-            images.add(new ImageElement(R.drawable.joe1));
-        }
 
         // Assign Adapter to Recycler View
-        mAdapter = new GalleryAdapter(images);
+        mAdapter = new GalleryAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
 
         // Add observer for the Moment live data
         mMomentViewModel.getAllMoments().observe(this, new Observer<List<Moment>>() {
             @Override
-            public void onChanged(List<Moment> moments) {
-                for (Moment moment : moments) {
-                    if (moment.imageFilePathIsString()) {
-                        ImageElement element = new ImageElement(new File(moment.getImageFilePath()));
-                        mAdapter.addImage(element);
-                    } else if (moment.imageFilePathIsInt()) {
-                        ImageElement element = new ImageElement(moment.getImageFilePathInt());
-                        mAdapter.addImage(element);
-                    }
-                }
+            public void onChanged(@Nullable final List<Moment> moments) {
+                mAdapter.setMoments(moments);
             }
         });
 
@@ -128,20 +116,6 @@ public class GalleryActivity extends AppCompatActivity {
             moments.add(tmpMoment);
         }
         return moments;
-    }
-
-    /**
-     * given a list of photos, it creates a list of myElements
-     * @param returnedPhotos
-     * @return
-             */
-    private List<ImageElement> getImageElements(List<File> returnedPhotos) {
-        List<ImageElement> imageElementList = new ArrayList<>();
-        for (File file: returnedPhotos){
-            ImageElement element = new ImageElement(file);
-            imageElementList.add(element);
-        }
-        return imageElementList;
     }
 
     @Override

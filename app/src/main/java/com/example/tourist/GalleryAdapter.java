@@ -25,7 +25,7 @@ import java.util.List;
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Holder> {
 
     private Context context;
-    private static List<ImageElement> items;
+    private static List<Moment> mMoments;
 
 
     public class View_Holder extends RecyclerView.ViewHolder {
@@ -38,28 +38,21 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
     }
 
 
-    public GalleryAdapter(List<ImageElement> items) {
-        this.items = items;
-    }
-
-
-    public GalleryAdapter(Context context, List<ImageElement> items) {
+    public GalleryAdapter(Context context) {
         super();
-        this.items = items;
         this.context = context;
     }
 
 
-    public static List<ImageElement> getItems() {
-        return items;
+    public static List<Moment> getMoments() {
+        return mMoments;
     }
 
 
     @Override
     public View_Holder onCreateViewHolder(ViewGroup parent, int viewType) {
-        //Inflate the layout, initialize the View Holder
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.image_item,
-                parent, false);
+        LayoutInflater inflater = LayoutInflater.from(this.context);
+        View v = inflater.inflate(R.layout.image_item, parent, false);
         View_Holder holder = new View_Holder(v);
         context = parent.getContext();
         return holder;
@@ -68,12 +61,10 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
 
     @Override
     public void onBindViewHolder(View_Holder holder, int position) {
-        if (holder != null && items.get(position) != null) {
-            if (items.get(position).image != -1) {
-                Log.d("Using image resource", Integer.toString(items.get(position).image));
-                holder.imageView.setImageResource(items.get(position).image);
-            } else if (items.get(position).file != null) {
-                Log.d("Using bitmap", items.get(position).file.getAbsolutePath());
+        if (holder != null && mMoments.get(position) != null) {
+            if (mMoments.get(position).imageFilePathIsInt()) {
+                holder.imageView.setImageResource(mMoments.get(position).getImageFilePathInt());
+            } else if (mMoments.get(position).imageFilePathIsString()) {
                 new UploadSingleImageTask().execute(new HolderAndPosition(position, holder));
             }
 
@@ -91,26 +82,26 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
 
     @Override
     public int getItemCount() {
-        return items.size();
+        if (mMoments != null ) {
+            return mMoments.size();
+        }
+        return 0;
     }
 
-    public void addImage(ImageElement imageElement) {
-        getItems().add(imageElement);
+    public void addMoment(Moment moment) {
+        getMoments().add(moment);
         notifyDataSetChanged();
     }
 
-    public void addImages(List<ImageElement> imageElements) {
-        for (ImageElement imageElement : imageElements) {
-            getItems().add(imageElement);
-            notifyDataSetChanged();
-        }
+    public void setMoments(List<Moment> moments) {
+        mMoments = moments;
+        notifyDataSetChanged();
     }
 
+
     public void addMoments(List<Moment> moments) {
-        ImageElement tmp;
         for (Moment moment : moments) {
-            tmp = new ImageElement(new File(moment.getImageFilePath()));
-            getItems().add(tmp);
+            this.addMoment(moment);
             notifyDataSetChanged();
         }
     }
@@ -157,7 +148,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
             holderAndPositionReference = new WeakReference<>(holderAndPosition[0]);
             HolderAndPosition holdAndPos = holderAndPositionReference.get();
             Bitmap bitmap = decodeSampledBitmapFromResource(
-                    items.get(holdAndPos.position).file.getAbsolutePath(), 100, 100);
+                    mMoments.get(holdAndPos.position).getImageFilePath(), 100, 100);
             return bitmap;
         }
 

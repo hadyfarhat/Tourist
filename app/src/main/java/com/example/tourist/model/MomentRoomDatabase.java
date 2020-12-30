@@ -61,10 +61,4 @@ public abstract class MomentRoomDatabase extends RoomDatabase {
             return null;
         }
     }
-
-    private static Moment createMoment(int path) {
-        Moment moment = new Moment("Joe");
-        moment.setImageFilePathInt(path);
-        return moment;
-    }
 }
