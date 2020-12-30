@@ -148,7 +148,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
             holderAndPositionReference = new WeakReference<>(holderAndPosition[0]);
             HolderAndPosition holdAndPos = holderAndPositionReference.get();
             Bitmap bitmap = decodeSampledBitmapFromResource(
-                    mMoments.get(holdAndPos.position).getImageFilePath(), 100, 100);
+                    mMoments.get(holdAndPos.position).getImageFilePath(), 230, 270);
             return bitmap;
         }
 
