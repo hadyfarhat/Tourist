@@ -123,7 +123,7 @@ public class GalleryActivity extends AppCompatActivity {
         List<Moment> moments = new ArrayList<>();
         Moment tmpMoment;
         for (File file: returnedPhotos){
-            tmpMoment = new Moment("title");
+            tmpMoment = new Moment();
             tmpMoment.setImageFilePath(file.getPath());
             moments.add(tmpMoment);
         }

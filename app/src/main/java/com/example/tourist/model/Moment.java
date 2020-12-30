@@ -17,10 +17,6 @@ public class Moment {
     // TODO image int file path
     // TODO timestamp member field
 
-    public Moment(String title) {
-        this.title = title;
-    }
-
     public int getId() {
         return this.id;
     }
