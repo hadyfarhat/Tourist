@@ -41,18 +41,10 @@ public class GalleryActivity extends AppCompatActivity {
         mRecyclerView = initialiseRecyclerViewWithGridLayoutManager(
                 R.id.images, true, 3);
 
-
-        // Assign Adapter to Recycler View
         mAdapter = new GalleryAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
 
-        // Add observer for the Moment live data
-        mMomentViewModel.getAllMoments().observe(this, new Observer<List<Moment>>() {
-            @Override
-            public void onChanged(@Nullable final List<Moment> moments) {
-                mAdapter.setMoments(moments);
-            }
-        });
+        mMomentViewModel.getAllMoments().observe(this, createMomentObserver());
 
         initEasyImage();
 
@@ -74,6 +66,20 @@ public class GalleryActivity extends AppCompatActivity {
                 EasyImage.openCamera(getActivity(), 0);
             }
         });
+    }
+
+
+    /**
+     * Create an observer for the Moment View Model
+     * @return
+     */
+    private Observer<List<Moment>> createMomentObserver() {
+        return new Observer<List<Moment>>() {
+            @Override
+            public void onChanged(@Nullable final List<Moment> moments) {
+                mAdapter.setMoments(moments);
+            }
+        };
     }
 
 
