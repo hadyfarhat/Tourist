@@ -40,11 +40,22 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
     }
 
 
+    /**
+     * returns the current list of moments
+     * @return
+     */
     public static List<Moment> getMoments() {
         return mMoments;
     }
 
 
+    /**
+     * Creates an inflater which inflates the view with a view item.
+     * Creates a view holder based on the inflater and returns it
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public View_Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(this.context);
@@ -55,6 +66,16 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
     }
 
 
+    /**
+     * Binds the view holder with the required view item.
+     * The view item is of type ImageView
+     * The image being bounded could be either an int or a file.
+     *
+     * A click listener will be set on the view holder which will be executed when an image
+     * is clicked. The view holder will then start another activity for the image to be viewed.
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(View_Holder holder, int position) {
         if (holder != null && mMoments.get(position) != null) {
@@ -76,6 +97,10 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
     }
 
 
+    /**
+     * Get count of moments array
+     * @return
+     */
     @Override
     public int getItemCount() {
         if (mMoments != null ) {
@@ -84,23 +109,16 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
         return 0;
     }
 
-    public void addMoment(Moment moment) {
-        getMoments().add(moment);
-        notifyDataSetChanged();
-    }
 
+    /**
+     * Sets the member moments array to the passed parameter
+     * @param moments
+     */
     public void setMoments(List<Moment> moments) {
         mMoments = moments;
         notifyDataSetChanged();
     }
 
-
-    public void addMoments(List<Moment> moments) {
-        for (Moment moment : moments) {
-            this.addMoment(moment);
-            notifyDataSetChanged();
-        }
-    }
 
     public static Bitmap decodeSampledBitmapFromResource(String filePath, int reqWidth, int reqHeight) {
         // First decode with inJustDecodeBounds=true to check dimensions
