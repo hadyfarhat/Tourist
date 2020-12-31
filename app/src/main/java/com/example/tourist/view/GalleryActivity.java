@@ -36,7 +36,7 @@ public class GalleryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_gallery);
         activity = this;
 
-        mMomentViewModel = ViewModelProviders.of(this).get(MomentViewModel.class);
+        mMomentViewModel = createMomentViewModel();
 
         mRecyclerView = initialiseRecyclerViewWithGridLayoutManager(
                 R.id.images, true, 3);
@@ -66,6 +66,15 @@ public class GalleryActivity extends AppCompatActivity {
                 EasyImage.openCamera(getActivity(), 0);
             }
         });
+    }
+
+
+    /**
+     * Creates a Moment View Model
+     * @return
+     */
+    private MomentViewModel createMomentViewModel() {
+        return ViewModelProviders.of(this).get(MomentViewModel.class);
     }
 
 
