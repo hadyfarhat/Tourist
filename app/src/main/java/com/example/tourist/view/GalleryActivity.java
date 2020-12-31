@@ -48,22 +48,40 @@ public class GalleryActivity extends AppCompatActivity {
 
         initEasyImage();
 
-        // get the images from the Gallery
         FloatingActionButton fabGallery = (FloatingActionButton) findViewById(R.id.fab_gallery);
-        fabGallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                EasyImage.openGallery(getActivity(), 0);
-            }
-        });
+        createFabGalleryClickListener(fabGallery);
 
-        // TODO: 23/12/2020 Fix camera dependencies
-        // Get a photo from camera
         FloatingActionButton fabCamera = (FloatingActionButton) findViewById(R.id.fab_camera);
+        createFabCameraClickListener(fabCamera);
+    }
+
+
+    /**
+     * Create an on click listener to the camera fab.
+     * When clicked, it will open the camera using Easy Image.
+     * @param fabCamera
+     */
+    private void createFabCameraClickListener(FloatingActionButton fabCamera) {
+        // TODO: 23/12/2020 Fix camera dependencies
         fabCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 EasyImage.openCamera(getActivity(), 0);
+            }
+        });
+    }
+
+
+    /**
+     * Create an on click listener to the gallery fab.
+     * When clicked, it will open the phone's gallery using Easy Image
+     * @param fabGallery
+     */
+    private void createFabGalleryClickListener(FloatingActionButton fabGallery) {
+        fabGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EasyImage.openGallery(getActivity(), 0);
             }
         });
     }
@@ -123,6 +141,7 @@ public class GalleryActivity extends AppCompatActivity {
                 .setAllowMultiplePickInGallery(true);
     }
 
+
     /**
      * add the selected images to the grid
      * @param returnedPhotos
@@ -133,6 +152,7 @@ public class GalleryActivity extends AppCompatActivity {
             mMomentViewModel.insert(moment);
         }
     }
+
 
     /**
      * given a list of photos, it creates a list of Moments
@@ -149,6 +169,7 @@ public class GalleryActivity extends AppCompatActivity {
         }
         return moments;
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -172,6 +193,7 @@ public class GalleryActivity extends AppCompatActivity {
             }
         });
     }
+
 
     public Activity getActivity() {
         return activity;
