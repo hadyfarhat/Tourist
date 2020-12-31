@@ -143,11 +143,11 @@ public class GalleryActivity extends AppCompatActivity {
 
 
     /**
-     * add the selected images to the grid
+     * Convert the passed files into Moments and insert them into the Moment View Model
      * @param returnedPhotos
      */
-    private void onPhotosReturned(List<File> returnedPhotos) {
-        List<Moment> moments = getMomentsFromReturnedPhotos(returnedPhotos);
+    private void insertPhotosIntoMomentViewModel(List<File> returnedPhotos) {
+        List<Moment> moments = createMomentsFromFiles(returnedPhotos);
         for (Moment moment : moments) {
             mMomentViewModel.insert(moment);
         }
@@ -155,14 +155,14 @@ public class GalleryActivity extends AppCompatActivity {
 
 
     /**
-     * given a list of photos, it creates a list of Moments
-     * @param returnedPhotos
+     * Convert files into Moments
+     * @param files - the files to be converted
      * @return
      */
-    private List<Moment> getMomentsFromReturnedPhotos(List<File> returnedPhotos) {
+    private List<Moment> createMomentsFromFiles(List<File> files) {
         List<Moment> moments = new ArrayList<>();
         Moment tmpMoment;
-        for (File file: returnedPhotos){
+        for (File file: files){
             tmpMoment = new Moment();
             tmpMoment.setImageFilePath(file.getPath());
             moments.add(tmpMoment);
@@ -171,6 +171,12 @@ public class GalleryActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Inserts the selected photos from the gallery into the Moment View Model
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -184,7 +190,7 @@ public class GalleryActivity extends AppCompatActivity {
 
             @Override
             public void onImagesPicked(List<File> imageFiles, EasyImage.ImageSource source, int type) {
-                onPhotosReturned(imageFiles);
+                insertPhotosIntoMomentViewModel(imageFiles);
             }
 
             @Override
@@ -195,6 +201,10 @@ public class GalleryActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Returns the current activity
+     * @return
+     */
     public Activity getActivity() {
         return activity;
     }
