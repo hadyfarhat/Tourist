@@ -35,14 +35,11 @@ public class GalleryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
         activity = this;
+
         mMomentViewModel = ViewModelProviders.of(this).get(MomentViewModel.class);
 
-        // Initialise Recycler View and assign it a layout manager
-        mRecyclerView = findViewById(R.id.images);
-        mRecyclerView.setHasFixedSize(true);
-        int numberOfColumnsInTheGrid = 3;
-        mRecyclerView.setLayoutManager(
-                new GridLayoutManager(this, numberOfColumnsInTheGrid));
+        mRecyclerView = initialiseRecyclerViewWithGridLayoutManager(
+                R.id.images, true, 3);
 
 
         // Assign Adapter to Recycler View
@@ -78,6 +75,27 @@ public class GalleryActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    /**
+     * Creates a recycler view and assigns it the passed view id. Recycler view will use the
+     * Grid Layout manager.
+     * @param viewId - id of the view to be assigned to the recycler view
+     * @param hasFixedSize - determines whether the recyler view's will be affected by
+     *                     the adapter contents
+     * @param numberOfColumnsInTheGrid - number of columns in grid
+     * @return
+     */
+    private RecyclerView initialiseRecyclerViewWithGridLayoutManager(int viewId,
+                                                                     boolean hasFixedSize,
+                                                                     int numberOfColumnsInTheGrid) {
+        RecyclerView recyclerView = findViewById(viewId);
+        recyclerView.setHasFixedSize(hasFixedSize);
+        recyclerView.setLayoutManager(
+                new GridLayoutManager(this, numberOfColumnsInTheGrid));
+        return recyclerView;
+    }
+
 
     /**
      * Initialise Easy Image
