@@ -1,4 +1,4 @@
-package com.example.tourist;
+package com.example.tourist.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.example.tourist.R;
 import com.example.tourist.model.Moment;
 
 public class ShowImageActivity extends AppCompatActivity {

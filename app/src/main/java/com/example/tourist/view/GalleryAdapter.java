@@ -1,24 +1,20 @@
-package com.example.tourist;
+package com.example.tourist.view;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tourist.R;
 import com.example.tourist.model.Moment;
 
-import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.List;
 

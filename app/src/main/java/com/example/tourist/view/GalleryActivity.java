@@ -1,9 +1,8 @@
-package com.example.tourist;
+package com.example.tourist.view;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
+import com.example.tourist.R;
 import com.example.tourist.model.Moment;
 import com.example.tourist.viewmodel.MomentViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
