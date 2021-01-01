@@ -14,7 +14,7 @@ public class MomentView extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_image);
+        setContentView(R.layout.moment_view);
 
         Bundle b = getIntent().getExtras();
         int position = -1;
