@@ -88,7 +88,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, ShowImageActivity.class);
+                    Intent intent = new Intent(context, MomentView.class);
                     intent.putExtra("position", position);
                     context.startActivity(intent);
                 }
