@@ -24,7 +24,7 @@ import java.util.List;
 import pl.aprilapps.easyphotopicker.DefaultCallback;
 import pl.aprilapps.easyphotopicker.EasyImage;
 
-public class GalleryActivity extends AppCompatActivity {
+public class JourneyDetailView extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private GalleryAdapter mAdapter;
     private Activity activity;

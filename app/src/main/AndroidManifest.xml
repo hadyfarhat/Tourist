@@ -10,9 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tourist">
         <activity android:name=".view.MomentView"
-            android:parentActivityName=".view.GalleryActivity">
+            android:parentActivityName=".view.JourneyDetailView">
         </activity>
-        <activity android:name=".view.GalleryActivity"
+        <activity android:name=".view.JourneyDetailView"
                   android:label="Gallery Activity"
                   android:parentActivityName=".view.MainActivity" />
         <activity android:name=".view.MainActivity">

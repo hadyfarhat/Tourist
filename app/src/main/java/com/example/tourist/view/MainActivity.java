@@ -13,12 +13,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.journey_detail_view);
 
     }
 
     public void launchGallery(View view) {
-        Intent intent = new Intent(this, GalleryActivity.class);
+        Intent intent = new Intent(this, JourneyDetailView.class);
         startActivity(intent);
     }
 
