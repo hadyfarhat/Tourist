@@ -153,6 +153,10 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
     }
 
 
+    /**
+     * Creates a bitmap based on the file provided.
+     * It then uses this bitmap to set the image of the view holder's image item
+     */
     // TODO: 23/12/2020 Save bitmap into a file for better efficiency
     private class UploadSingleImageTask extends AsyncTask<HolderAndPosition, Void, Bitmap> {
         private WeakReference<HolderAndPosition>  holderAndPositionReference;
