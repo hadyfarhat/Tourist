@@ -34,7 +34,7 @@ public class JourneyDetailView extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gallery);
+        setContentView(R.layout.journey_detail_view);
         activity = this;
 
         mMomentViewModel = createMomentViewModel();

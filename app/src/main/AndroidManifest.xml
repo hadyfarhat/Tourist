@@ -9,12 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tourist">
-        <activity android:name=".view.MomentView"
-            android:parentActivityName=".view.JourneyDetailView">
-        </activity>
-        <activity android:name=".view.JourneyDetailView"
-                  android:label="Gallery Activity"
-                  android:parentActivityName=".view.MainActivity" />
+        <activity android:name=".view.JourneysView"></activity>
+        <activity
+            android:name=".view.MomentView"
+            android:parentActivityName=".view.JourneyDetailView"></activity>
+        <activity
+            android:name=".view.JourneyDetailView"
+            android:label="Gallery Activity"
+            android:parentActivityName=".view.MainActivity" />
         <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
