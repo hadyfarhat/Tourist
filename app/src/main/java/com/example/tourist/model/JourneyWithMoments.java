@@ -9,7 +9,7 @@ public class JourneyWithMoments {
     @Embedded public Journey journey;
     @Relation(
             parentColumn = "id",
-            entityColumn = "journeyId"
+            entityColumn = "journey_id"
     )
     public List<Moment> moments;
 }

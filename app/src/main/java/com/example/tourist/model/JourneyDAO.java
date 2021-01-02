@@ -15,6 +15,9 @@ import java.util.List;
     @Insert
     void insert(Moment moment);
 
+    @Query("DELETE FROM journey")
+    void deleteAll();
+
     @Transaction
     @Query("SELECT * FROM journey")
     public List<JourneyWithMoments> getJourneyWithMoments();

@@ -13,8 +13,8 @@ public class MomentRepository {
     private LiveData<List<Moment>> allMoments;
 
     public MomentRepository(Application application) {
-        MomentRoomDatabase momentdb = MomentRoomDatabase.getDatabase(application);
-        momentDAO = momentdb.momentDAO();
+        TouristRoomDatabase db = TouristRoomDatabase.getDatabase(application);
+        momentDAO = db.momentDAO();
         allMoments = momentDAO.getAllMoments();
     }
 
