@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.tourist.R;
@@ -14,7 +15,7 @@ import com.example.tourist.R;
 import java.util.ArrayList;
 import java.util.List;
 
-@Database(entities = {Moment.class}, version = 1, exportSchema = false)
+@Database(entities = {Moment.class}, version = 3, exportSchema = false)
 public abstract class MomentRoomDatabase extends RoomDatabase {
     public abstract MomentDAO momentDAO();
     private static MomentRoomDatabase INSTANCE;
@@ -61,4 +62,15 @@ public abstract class MomentRoomDatabase extends RoomDatabase {
             return null;
         }
     }
+
+    /*********************
+     * Migrations
+     *********************/
+
+    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("ALTER TABLE moment ADD COLUMN journey_id INTEGER");
+        }
+    };
 }

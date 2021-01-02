@@ -1,6 +1,7 @@
 package com.example.tourist.model;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -9,12 +10,12 @@ public class Moment {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     private int id;
-
+    @ColumnInfo(name = "journey_id")
+    private long journeyId;
     private String title;
     private String description;
     private String imageFilePath;
     private int imageFilePathInt = -1;
-    // TODO image int file path
     // TODO timestamp member field
 
     public int getId() {
@@ -63,5 +64,13 @@ public class Moment {
 
     public boolean imageFilePathIsString() {
         return this.getImageFilePath() != null;
+    }
+
+    public long getJourneyId() {
+        return journeyId;
+    }
+
+    public void setJourneyId(long journeyId) {
+        this.journeyId = journeyId;
     }
 }
