@@ -1,5 +1,6 @@
 package com.example.tourist.model;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -20,5 +21,5 @@ import java.util.List;
 
     @Transaction
     @Query("SELECT * FROM journey")
-    public List<JourneyWithMoments> getJourneyWithMoments();
+    public LiveData<List<JourneyWithMoments>> getJourneyWithMoments();
 }

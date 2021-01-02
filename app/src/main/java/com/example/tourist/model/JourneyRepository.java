@@ -10,7 +10,7 @@ import java.util.List;
 
 public class JourneyRepository {
     private JourneyDAO journeyDAO;
-    private List<JourneyWithMoments> allJourneys;
+    private LiveData<List<JourneyWithMoments>> allJourneys;
 
     public JourneyRepository(Application application) {
         TouristRoomDatabase db = TouristRoomDatabase.getDatabase(application);
@@ -18,7 +18,7 @@ public class JourneyRepository {
         allJourneys = journeyDAO.getJourneyWithMoments();
     }
 
-    public List<JourneyWithMoments> getAllJourneys() { return this.allJourneys;}
+    public LiveData<List<JourneyWithMoments>> getAllJourneys() { return this.allJourneys;}
 
     public void insert(Journey journey) {
         new JourneyRepository.insertAsyncTask(this.journeyDAO).execute(journey);

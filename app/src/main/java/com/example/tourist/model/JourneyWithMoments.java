@@ -1,5 +1,6 @@
 package com.example.tourist.model;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Embedded;
 import androidx.room.Relation;
 
@@ -11,5 +12,5 @@ public class JourneyWithMoments {
             parentColumn = "id",
             entityColumn = "journey_id"
     )
-    public List<Moment> moments;
+    public LiveData<List<Moment>> moments;
 }
