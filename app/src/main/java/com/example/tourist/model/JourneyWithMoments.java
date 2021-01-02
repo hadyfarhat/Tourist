@@ -12,5 +12,5 @@ public class JourneyWithMoments {
             parentColumn = "id",
             entityColumn = "journey_id"
     )
-    public LiveData<List<Moment>> moments;
+    public List<Moment> moments;
 }

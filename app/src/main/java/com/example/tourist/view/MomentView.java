@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.example.tourist.R;
+import com.example.tourist.view.adapter.GalleryAdapter;
 
 public class MomentView extends AppCompatActivity {
 

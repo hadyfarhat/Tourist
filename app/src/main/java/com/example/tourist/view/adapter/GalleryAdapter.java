@@ -1,4 +1,4 @@
-package com.example.tourist.view;
+package com.example.tourist.view.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tourist.R;
 import com.example.tourist.model.Moment;
+import com.example.tourist.view.MomentView;
 
 import java.lang.ref.WeakReference;
 import java.util.List;

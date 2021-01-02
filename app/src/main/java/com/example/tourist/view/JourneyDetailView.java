@@ -14,6 +14,7 @@ import android.view.View;
 
 import com.example.tourist.R;
 import com.example.tourist.model.Moment;
+import com.example.tourist.view.adapter.GalleryAdapter;
 import com.example.tourist.viewmodel.MomentViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
