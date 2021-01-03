@@ -114,7 +114,7 @@ public class JourneyDetailView extends AppCompatActivity {
      * Creates a recycler view and assigns it the passed view id. Recycler view will use the
      * Grid Layout manager.
      * @param viewId - id of the view to be assigned to the recycler view
-     * @param hasFixedSize - determines whether the recyler view's will be affected by
+     * @param hasFixedSize - determines whether the recycler view's will be affected by
      *                     the adapter contents
      * @param numberOfColumnsInTheGrid - number of columns in grid
      * @return

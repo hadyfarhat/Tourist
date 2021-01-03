@@ -18,7 +18,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void launchGallery(View view) {
-        Intent intent = new Intent(this, JourneyDetailView.class);
+        //Intent intent = new Intent(this, JourneyDetailView.class);
+        Intent intent = new Intent(this, JourneysView.class);
         startActivity(intent);
     }
 

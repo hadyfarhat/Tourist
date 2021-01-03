@@ -22,6 +22,10 @@ import java.util.List;
     @Query("SELECT * FROM journey ORDER BY id DESC LIMIT 1")
     Journey getLastJourney();
 
+   @Transaction
+   @Query("SELECT * FROM journey")
+   List<JourneyWithMoments> getNotLiveJourneyWithMoments();
+
     @Transaction
     @Query("SELECT * FROM journey")
     public LiveData<List<JourneyWithMoments>> getJourneyWithMoments();
