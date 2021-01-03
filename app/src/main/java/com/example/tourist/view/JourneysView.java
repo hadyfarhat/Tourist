@@ -32,7 +32,7 @@ public class JourneysView extends AppCompatActivity {
         mJourneyViewModel = createJourneyViewModel();
 
         RecyclerView mRecyclerView = initialiseRecyclerViewWithGridLayoutManager(
-                R.id.journeys, true, 3);
+                R.id.journeys, true, 2);
         mAdapter = new JourneyAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
 
