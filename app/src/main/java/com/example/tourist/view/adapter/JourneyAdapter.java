@@ -2,7 +2,6 @@ package com.example.tourist.view.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tourist.R;
-import com.example.tourist.model.Journey;
 import com.example.tourist.model.JourneyWithMoments;
 import com.example.tourist.model.Moment;
 
@@ -129,7 +127,8 @@ public class JourneyAdapter extends RecyclerView.Adapter<JourneyAdapter.View_Hol
             holderAndPositionReference = new WeakReference<>(holderAndPosition[0]);
             JourneyAdapter.HolderAndPosition holdAndPos = holderAndPositionReference.get();
             Bitmap bitmap = AdapterHelper.decodeSampledBitmapFromResource(
-                    mJourneys.get(holdAndPos.position).moments.get(0).getImageFilePath(), 150, 130);
+                    mJourneys.get(holdAndPos.position).moments.get(0).getImageFilePath(),
+                    R.dimen.journey_image_width, R.dimen.journey_image_height);
             return bitmap;
         }
 

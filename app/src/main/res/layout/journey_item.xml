@@ -18,7 +18,7 @@
             <ImageView
                 android:id="@+id/journey_image"
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
+                android:layout_height="@dimen/journey_image_height"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
