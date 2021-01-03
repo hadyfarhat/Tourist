@@ -3,6 +3,7 @@ package com.example.tourist.view.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.example.tourist.model.Journey;
 import com.example.tourist.model.JourneyWithMoments;
 import com.example.tourist.model.Moment;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class JourneyAdapter extends RecyclerView.Adapter<JourneyAdapter.View_Holder> {
@@ -81,8 +83,7 @@ public class JourneyAdapter extends RecyclerView.Adapter<JourneyAdapter.View_Hol
                 if (moment.imageFilePathIsInt()) {
                     holder.journeyImage.setImageResource(moment.getImageFilePathInt());
                 } else if (moment.imageFilePathIsString()) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(moment.getImageFilePath());
-                    holder.journeyImage.setImageBitmap(bitmap);
+                    new UploadSingleImageTask().execute(new HolderAndPosition(position, holder));
                 }
             } else {
                 holder.journeyImage.setImageResource(R.drawable.joe1);
@@ -113,4 +114,41 @@ public class JourneyAdapter extends RecyclerView.Adapter<JourneyAdapter.View_Hol
         mJourneys = journeys;
         notifyDataSetChanged();
     }
+
+
+    /**
+     * Creates a bitmap based on the file provided.
+     * It then uses this bitmap to set the image of the view holder's image item
+     */
+    // TODO: 23/12/2020 Save bitmap into a file for better efficiency
+    private class UploadSingleImageTask extends AsyncTask<JourneyAdapter.HolderAndPosition, Void, Bitmap> {
+        private WeakReference<JourneyAdapter.HolderAndPosition> holderAndPositionReference;
+
+        @Override
+        protected Bitmap doInBackground(JourneyAdapter.HolderAndPosition... holderAndPosition) {
+            holderAndPositionReference = new WeakReference<>(holderAndPosition[0]);
+            JourneyAdapter.HolderAndPosition holdAndPos = holderAndPositionReference.get();
+            Bitmap bitmap = AdapterHelper.decodeSampledBitmapFromResource(
+                    mJourneys.get(holdAndPos.position).moments.get(0).getImageFilePath(), 150, 130);
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            JourneyAdapter.HolderAndPosition holdAndPos = holderAndPositionReference.get();
+            holdAndPos.holder.journeyImage.setImageBitmap(bitmap);
+        }
+    }
+
+
+    private class HolderAndPosition {
+        int position;
+        JourneyAdapter.View_Holder holder;
+
+        public HolderAndPosition(int position, JourneyAdapter.View_Holder holder) {
+            this.position = position;
+            this.holder = holder;
+        }
+    }
+
 }

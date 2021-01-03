@@ -137,8 +137,6 @@ public class MomentAdapter extends RecyclerView.Adapter<MomentAdapter.View_Holde
             HolderAndPosition holdAndPos = holderAndPositionReference.get();
             Bitmap bitmap = AdapterHelper.decodeSampledBitmapFromResource(
                     mMoments.get(holdAndPos.position).getImageFilePath(), 230, 270);
-            //Bitmap bitmap = decodeSampledBitmapFromResource(
-            //        mMoments.get(holdAndPos.position).getImageFilePath(), 230, 270);
             return bitmap;
         }
 
