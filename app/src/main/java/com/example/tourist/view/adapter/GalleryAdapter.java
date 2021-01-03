@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tourist.R;
@@ -57,8 +58,9 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
      * @param viewType
      * @return
      */
+    @NonNull
     @Override
-    public View_Holder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public View_Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(this.context);
         View v = inflater.inflate(R.layout.image_item, parent, false);
         View_Holder holder = new View_Holder(v);

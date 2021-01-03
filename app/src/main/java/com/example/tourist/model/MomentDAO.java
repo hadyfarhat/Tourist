@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -15,6 +16,12 @@ public interface MomentDAO {
 
     @Query("SELECT * FROM moment ORDER BY title ASC")
     LiveData<List<Moment>> getAllMoments();
+
+    @Query("SELECT * FROM moment ORDER BY title ASC")
+    List<Moment> getNotLiveMoments();
+
+    @Update
+    void updateMoment(Moment moment);
 
     @Query("DELETE FROM moment")
     void deleteAll();

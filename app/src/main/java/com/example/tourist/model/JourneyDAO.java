@@ -19,6 +19,9 @@ import java.util.List;
     @Query("DELETE FROM journey")
     void deleteAll();
 
+    @Query("SELECT * FROM journey ORDER BY id DESC LIMIT 1")
+    Journey getLastJourney();
+
     @Transaction
     @Query("SELECT * FROM journey")
     public LiveData<List<JourneyWithMoments>> getJourneyWithMoments();
