@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.example.tourist.R;
-import com.example.tourist.view.adapter.GalleryAdapter;
+import com.example.tourist.view.adapter.MomentAdapter;
 
 public class MomentView extends AppCompatActivity {
 
@@ -23,7 +23,7 @@ public class MomentView extends AppCompatActivity {
             position = b.getInt("position");
             if (position != -1) {
                 ImageView imageView = findViewById(R.id.moment_image);
-                com.example.tourist.model.Moment moment = GalleryAdapter.getMoments().get(position);
+                com.example.tourist.model.Moment moment = MomentAdapter.getMoments().get(position);
                 if (moment.imageFilePathIsInt()) {
                     imageView.setImageResource(moment.getImageFilePathInt());
                 } else if (moment.imageFilePathIsString()) {

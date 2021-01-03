@@ -14,7 +14,7 @@ import android.view.View;
 
 import com.example.tourist.R;
 import com.example.tourist.model.Moment;
-import com.example.tourist.view.adapter.GalleryAdapter;
+import com.example.tourist.view.adapter.MomentAdapter;
 import com.example.tourist.viewmodel.MomentViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -26,8 +26,7 @@ import pl.aprilapps.easyphotopicker.DefaultCallback;
 import pl.aprilapps.easyphotopicker.EasyImage;
 
 public class JourneyDetailView extends AppCompatActivity {
-    private RecyclerView mRecyclerView;
-    private GalleryAdapter mAdapter;
+    private MomentAdapter mAdapter;
     private Activity activity;
     private MomentViewModel mMomentViewModel;
 
@@ -39,10 +38,10 @@ public class JourneyDetailView extends AppCompatActivity {
 
         mMomentViewModel = createMomentViewModel();
 
-        mRecyclerView = initialiseRecyclerViewWithGridLayoutManager(
+        RecyclerView mRecyclerView = initialiseRecyclerViewWithGridLayoutManager(
                 R.id.images, true, 3);
 
-        mAdapter = new GalleryAdapter(this);
+        mAdapter = new MomentAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
 
         mMomentViewModel.getAllMoments().observe(this, createMomentObserver());

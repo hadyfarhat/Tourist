@@ -20,7 +20,7 @@ import com.example.tourist.view.MomentView;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Holder> {
+public class MomentAdapter extends RecyclerView.Adapter<MomentAdapter.View_Holder> {
 
     private Context context;
     private static List<Moment> mMoments;
@@ -36,7 +36,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.View_Hol
     }
 
 
-    public GalleryAdapter(Context context) {
+    public MomentAdapter(Context context) {
         super();
         this.context = context;
     }
