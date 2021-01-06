@@ -29,6 +29,7 @@ public class JourneyDetailView extends AppCompatActivity {
     private MomentAdapter mAdapter;
     private Activity activity;
     private MomentViewModel mMomentViewModel;
+    private int journeyId = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,10 @@ public class JourneyDetailView extends AppCompatActivity {
         setContentView(R.layout.journey_detail_view);
         activity = this;
 
-        mMomentViewModel = createMomentViewModel();
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) { journeyId = bundle.getInt("journeyId"); }
+
+        mMomentViewModel = createMomentViewModel(journeyId);
 
         RecyclerView mRecyclerView = initialiseRecyclerViewWithGridLayoutManager(
                 R.id.images, true, 3);
@@ -89,10 +93,13 @@ public class JourneyDetailView extends AppCompatActivity {
 
     /**
      * Creates a Moment View Model
+     * @param journeyId - the id of the journey in which its moments will be displayed
      * @return
      */
-    private MomentViewModel createMomentViewModel() {
-        return ViewModelProviders.of(this).get(MomentViewModel.class);
+    private MomentViewModel createMomentViewModel(int journeyId) {
+        MomentViewModel momentViewModel =  ViewModelProviders.of(this).get(MomentViewModel.class);
+        momentViewModel.setRepository(journeyId);
+        return momentViewModel;
     }
 
 

@@ -17,6 +17,9 @@ public interface MomentDAO {
     @Query("SELECT * FROM moment ORDER BY title ASC")
     LiveData<List<Moment>> getAllMoments();
 
+    @Query("SELECT * FROM moment WHERE journey_id = :journeyId")
+    LiveData<List<Moment>> getAllJourneyMoments(int journeyId);
+
     @Query("SELECT * FROM moment ORDER BY title ASC")
     List<Moment> getNotLiveMoments();
 

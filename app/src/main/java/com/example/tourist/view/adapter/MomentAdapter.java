@@ -80,8 +80,8 @@ public class MomentAdapter extends RecyclerView.Adapter<MomentAdapter.View_Holde
      * @param position
      */
     @Override
-    public void onBindViewHolder(View_Holder holder, int position) {
-        if (holder != null && mMoments.get(position) != null) {
+    public void onBindViewHolder(@NonNull View_Holder holder, int position) {
+        if (mMoments.get(position) != null) {
             if (mMoments.get(position).imageFilePathIsInt()) {
                 holder.imageView.setImageResource(mMoments.get(position).getImageFilePathInt());
             } else if (mMoments.get(position).imageFilePathIsString()) {

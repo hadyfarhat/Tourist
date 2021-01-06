@@ -12,14 +12,20 @@ import com.example.tourist.model.MomentRepository;
 import java.util.List;
 
 public class MomentViewModel extends AndroidViewModel {
+    Application application;
     private MomentRepository mRepository;
     private LiveData<List<Moment>> mAllMoments;
 
     public MomentViewModel(@NonNull Application application) {
         super(application);
-        mRepository = new MomentRepository(application);
+        this.application = application;
+    }
+
+    public void setRepository(int journeyId) {
+        mRepository = new MomentRepository(this.application, journeyId);
         mAllMoments = mRepository.getAllMoments();
     }
+
 
     public LiveData<List<Moment>> getAllMoments() {
         return this.mAllMoments;

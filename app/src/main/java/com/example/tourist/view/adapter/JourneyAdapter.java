@@ -1,6 +1,7 @@
 package com.example.tourist.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tourist.R;
 import com.example.tourist.model.JourneyWithMoments;
 import com.example.tourist.model.Moment;
+import com.example.tourist.view.JourneyDetailView;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -86,12 +88,23 @@ public class JourneyAdapter extends RecyclerView.Adapter<JourneyAdapter.View_Hol
             } else {
                 holder.journeyImage.setImageResource(R.drawable.joe1);
             }
+
             // Set the title
             if (journey.journey.getTitle() != null) {
                 holder.journeyTitle.setText(journey.journey.getTitle());
             } else {
                 holder.journeyTitle.setText("This is a title");
             }
+
+            // Intent for Journey Detail View
+            holder.journeyImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(context, JourneyDetailView.class);
+                        intent.putExtra("journeyId", journey.journey.getId());
+                        context.startActivity(intent);
+                    }
+            });
         }
     }
 

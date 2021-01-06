@@ -12,15 +12,16 @@ public class MomentRepository {
     private MomentDAO momentDAO;
     private LiveData<List<Moment>> allMoments;
 
-    public MomentRepository(Application application) {
+    public MomentRepository(Application application, int journeyId) {
         TouristRoomDatabase db = TouristRoomDatabase.getDatabase(application);
         momentDAO = db.momentDAO();
-        allMoments = momentDAO.getAllMoments();
+        allMoments = momentDAO.getAllJourneyMoments(journeyId);
     }
 
     public LiveData<List<Moment>> getAllMoments() {
         return this.allMoments;
     }
+
 
     public void insert(Moment moment) {
         new insertAsyncTask(this.momentDAO).execute(moment);
