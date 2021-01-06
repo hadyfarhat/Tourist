@@ -156,6 +156,7 @@ public class JourneyDetailView extends AppCompatActivity {
     private void insertPhotosIntoMomentViewModel(List<File> returnedPhotos) {
         List<Moment> moments = createMomentsFromFiles(returnedPhotos);
         for (Moment moment : moments) {
+            moment.setJourneyId(this.journeyId);
             mMomentViewModel.insert(moment);
         }
     }
