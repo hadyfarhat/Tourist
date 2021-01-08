@@ -3,6 +3,10 @@ package com.example.tourist.view.adapter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+/**
+ * Includes common functionality used between the Journey and Moment adapters. This class helps
+ * prevent duplicate code in the adapters.
+ */
 public class AdapterHelper {
 
     public static Bitmap decodeSampledBitmapFromResource(String filePath, int reqWidth, int reqHeight) {

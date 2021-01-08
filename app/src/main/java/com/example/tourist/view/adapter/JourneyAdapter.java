@@ -21,6 +21,9 @@ import com.example.tourist.view.JourneyDetailView;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
+/**
+ * Represents the adapter class for managing Journeys
+ */
 public class JourneyAdapter extends RecyclerView.Adapter<JourneyAdapter.View_Holder> {
 
     private Context context;
@@ -73,11 +76,22 @@ public class JourneyAdapter extends RecyclerView.Adapter<JourneyAdapter.View_Hol
     }
 
 
+    /**
+     * Binds the view holder with the required view items. It also sets an on click listener for a
+     * journey image to start the Journey activity for that journey.
+     *
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(@NonNull View_Holder holder, int position) {
         JourneyWithMoments journey = mJourneys.get(position);
         if (journey != null) {
-            // Set the image
+            /*
+            if the journey has any moment, it takes the first moment and sets the journey image
+            to the image of that moment. If it doesn't have a moment, it uses a default image from
+            the drawable folder.
+             */
             if (journey.moments.size() > 0 && journey.moments.get(0) != null) {
                 Moment moment = journey.moments.get(0);
                 if (moment.imageFilePathIsInt()) {
@@ -109,6 +123,9 @@ public class JourneyAdapter extends RecyclerView.Adapter<JourneyAdapter.View_Hol
     }
 
 
+    /**
+     * @return size of the JourneyWithMoments list
+     */
     @Override
     public int getItemCount() {
         if (mJourneys != null)
