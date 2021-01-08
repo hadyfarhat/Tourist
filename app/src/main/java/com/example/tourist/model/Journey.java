@@ -5,6 +5,9 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+/**
+ * Represents the Journey Entity in the Room Database
+ */
 @Entity(tableName = "journey")
 public class Journey {
     @PrimaryKey(autoGenerate = true)

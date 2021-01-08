@@ -6,6 +6,10 @@ import androidx.room.Relation;
 
 import java.util.List;
 
+/**
+ * Represents the one-to-many relationship between a Journey and Moment.
+ * One Journey has many moments. One moment can only belong to one journey.
+ */
 public class JourneyWithMoments {
     @Embedded public Journey journey;
     @Relation(

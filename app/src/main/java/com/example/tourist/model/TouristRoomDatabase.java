@@ -14,6 +14,11 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Represents the main database of this application: Tourist database.
+ * It will create the database and populate its tables.
+ * It is responsible for handling migrations.
+ */
 @Database(entities = {Moment.class, Journey.class}, version = 1, exportSchema = false)
 public abstract class TouristRoomDatabase extends RoomDatabase {
     public abstract MomentDAO momentDAO();
