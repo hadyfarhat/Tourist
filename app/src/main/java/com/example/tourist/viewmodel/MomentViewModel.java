@@ -11,11 +11,19 @@ import com.example.tourist.model.MomentRepository;
 
 import java.util.List;
 
+/**
+ * Represents the View Model of the Moment entity
+ */
 public class MomentViewModel extends AndroidViewModel {
     Application application;
     private MomentRepository mRepository;
     private LiveData<List<Moment>> mAllMoments;
 
+    /**
+     * Constructor of the class which initialises the Moment repository
+     *
+     * @param application the application state
+     */
     public MomentViewModel(@NonNull Application application) {
         super(application);
         this.application = application;
