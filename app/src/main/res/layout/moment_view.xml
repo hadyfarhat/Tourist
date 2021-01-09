@@ -5,7 +5,7 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MomentView">
+    tools:context="uk.ac.shef.oak.com6510.view.MomentView">
 
     <ImageView
         android:id="@+id/moment_image"
